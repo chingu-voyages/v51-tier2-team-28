@@ -40,6 +40,6 @@ coding!
 - Abel #4: [GitHub](https://github.com/belunatic) / [LinkedIn](https://www.linkedin.com/in/abel-sila-24b4a97a/)
 - Matthew #5: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Alex #6: [GitHub](https://github.com/singhalex) / [LinkedIn](https://www.linkedin.com/in/kaur-singh-748000254/)
-- Bolaji #7: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Bolaji #7: [GitHub](https://github.com/Anuoluwatobi) / [LinkedIn](https://www.linkedin.com/in/anuoluwatobi-majesty-bolaji-734583237)
 - Smiti #8: [GitHub](https://github.com/SM171906) / [LinkedIn](https://www.linkedin.com/in/smitimishra/)
 - Abby #9: [GitHub](https://github.com/abbynyhof) / [LinkedIn](https://www.linkedin.com/in/abbynyhof/)
