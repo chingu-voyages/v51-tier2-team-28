@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext, useContext } from "react";
 import db from "../../utils/localstoragedb";
-import { nanoid } from "nanoid"
+import "../../utils/dummyData";
 
 const SiteContext = createContext(null);
 
@@ -11,49 +11,52 @@ export const DataProvider = ({ children }) => {
   // initialize data from localStorageDB
   const initialFriends = db.queryAll("friends");
   const initalGroup = db.queryAll("groups");
-  const initialExpenses = db.queryAll("expenses")
+  const initialExpenses = db.queryAll("expenses");
 
-  const [expense, setExpense] = useState(initialExpenses);
+  const [user, setUser] = useState(db.queryAll("user")[0]?.name || "");
+  const [expenses, setExpenses] = useState(initialExpenses);
   const [groupData, setGroupData] = useState(initalGroup);
   const [friends, setFriends] = useState(initialFriends);
   const [showCreateGroupForm, setShowCreateGroupForm] = useState(false);
   const [modal, setModal] = useState({
     show: false,
-    type: '',
-    id: ''
-  })
+    type: "",
+    id: "",
+  });
 
-  const handleSetModal = (type, id) => {
-    setModal(prev => ({
-      ...prev, 
-      show: !prev.show,
-      type,
-      id
-    }) )
+  const handleSetUser = (username) => {
+    setUser(username);
   };
 
-  console.log(modal)
+  const handleSetModal = (type, id) => {
+    if (!type) {
+      setModal({ show: false });
+    } else {
+      setModal((prev) => ({
+        show: !prev.show,
+        type,
+        id,
+      }));
+    }
+  };
+
+  console.log(modal);
 
   const handleCreateGroupForm = () => {
     setShowCreateGroupForm(!showCreateGroupForm);
   };
 
-  const handleSetExpense = (values) => {
-    setExpense((prev) => [
-      ...prev,
-      { ...values, id: nanoid(), date: new Date() },
-    ]);
-  };
-
   return (
     <SiteContext.Provider
       value={{
+        user,
+        handleSetUser,
         groupData,
         setGroupData,
         friends,
-        expense,
-        setExpense,
-        handleSetExpense,
+        setFriends,
+        expenses,
+        setExpenses,
         showCreateGroupForm,
         handleCreateGroupForm,
         modal,

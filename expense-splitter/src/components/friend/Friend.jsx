@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UseDataContext } from "../context/SiteContext";
 import Button from "../ui/Button";
-import ExpenseList from "./ExpenseList";
+import FriendList from "./FriendList";
 
-export default function Expense() {
+const Friend = () => {
   const navigate = useNavigate();
   const { user, handleSetModal, modal } = UseDataContext();
 
@@ -18,16 +18,19 @@ export default function Expense() {
   return (
     !modal.show && (
       <>
-        <div>
-          <ExpenseList />
-        </div>
+        <h1 className="text-center">Friends</h1>
+        <FriendList />
         <Button
           className="over absolute bottom-6 left-1/2 z-10 h-14 w-[200px] -translate-x-1/2 bg-primary"
-          onClick={() => handleSetModal("CreateExpense")}
+          onClick={() => {
+            handleSetModal("FriendForm");
+          }}
         >
-          Create Expense
+          Add Friend
         </Button>
       </>
     )
   );
-}
+};
+
+export default Friend;

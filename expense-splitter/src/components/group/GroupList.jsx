@@ -1,18 +1,15 @@
 import { useState } from "react";
 import Button from "../ui/Button";
 import { UseDataContext } from "../context/SiteContext";
-import EditGroup from "./EditGroup";
+import GroupFriendList from "./groupListComponent/GroupFriendList";
+import GroupExpenseList from "./groupListComponent/GroupExpenseList";
+import db from "../../utils/localstoragedb";
 
 // export default function GroupList(props) {
 export default function GroupList() {
   const [displayDetails, setDisplayDetails] = useState("");
-  const [editGroup, setEditGroup] = useState(false);
-  //get group edit info
-  const [editGroupData, setEditGroupData] = useState({});
-  const { groupData, setGroupData, friends, handleSetModal } = UseDataContext();
-
-  //change arrow icon when info displays
-  const [ icon, setIcon ] = useState("up");
+  const { groupData, setGroupData, friends, expenses, handleSetModal } =
+    UseDataContext();
 
   // const filteredData = groupData.filter((search) => {
   //   if (props.input === '') {
@@ -30,87 +27,132 @@ export default function GroupList() {
     }
   };
 
-  const handleEditGroup = (currentGroupData) => {
-    if (editGroup) {
-      setEditGroup(false);
+  //delete a group
+  const handleDelete = (id) => {
+    db.deleteRows("groups", { ID: id });
+    db.commit();
+    //call setState to render the component
+    setGroupData(db.queryAll("groups"));
+  };
+
+  //retrieve Friends/Expense List
+  //input : object in search, object in search ID, type
+  //output: display a list depending type
+  const retrieveList = (objectData, groupObjectIdArray, type) => {
+    //filter thru the friends object to return related friends in the group
+    const retrieveCurrentGroupObjectKeyIds = objectData.filter((object) =>
+      groupObjectIdArray.includes(object.id),
+    );
+    if (type === "friends") {
+      return <GroupFriendList friends={retrieveCurrentGroupObjectKeyIds} />;
     } else {
-      setEditGroup(true);
-      setEditGroupData(currentGroupData);
+      return (
+        <GroupExpenseList expenseList={retrieveCurrentGroupObjectKeyIds} />
+      );
     }
   };
 
-  //delete a group
-  const handleDelete = (id) => {
-    const updatedGroupData = groupData.filter((item) => item.id !== id);
-    setGroupData(updatedGroupData);
-  };
-
-  //retrieve Friends name with in the Group Details
-  //input : the object friends from Global; the Current Viewed Group Friends Array
-  const retrieveFriendsName = (friendsObject, friendId) => {
-    //filter thru the friends object to return related friends in the group
-    const retrieveFriendsId = friendsObject.filter((friendsObjectId) =>
-      friendId.includes(friendsObjectId.id),
+  //calculate the expense amount
+  //input: Expense Object, Group Expense Array, Group Budget
+  //output : Array with Expenses amount and flag to determine over/under
+  const expenseAmount = (
+    expenseObject,
+    groupExpenseArray,
+    currentGroupBudget,
+  ) => {
+    if (!groupExpenseArray) {
+      return [currentGroupBudget, "", true];
+    }
+    //filter to get the current group expenses
+    const retrieveGroupExpenses = expenseObject.filter((object) =>
+      groupExpenseArray.includes(object.id),
     );
-    //display the names of the friends
-    return retrieveFriendsId.map((friend) => (
-      <p key={friend.id}>{friend.name}</p>
-    ));
+    //if group has no expenses then it a new group
+    const newGroup = retrieveGroupExpenses ? false : true;
+    //calculate the expense Amount
+    const expenseAmount = retrieveGroupExpenses.reduce(
+      (acc, currentValue) => acc - Number(currentValue.amount),
+      Number(currentGroupBudget),
+    );
+    //determine over / under
+    const overBudget = expenseAmount < 0 ? true : false; //"text-red-600" : "text-green-600";
+    //return an array
+    return [Math.abs(expenseAmount.toFixed(2)), overBudget, newGroup];
   };
 
   // const groupList = filteredData.map((group) => (
-  const groupList = groupData.map((group) => (
-    <div
-      onClick={() => {handleDisplayDetails(group.id); if(icon === "up") {setIcon("down")} else {setIcon("up")}}}
-      key={group.id}
-      className="mb-1 flex cursor-pointer flex-col rounded-lg bg-slate-100 px-4 py-4"
-    >
-      <div className="flex justify-between items-center">
-        <h2 className="">{group.name}</h2>
-        { icon === "up" ? <i className="fa-solid fa-chevron-up text-3xl text-accent"></i> : null }
-        { icon === "down" ? <i className="fa-solid fa-chevron-down text-3xl text-accent"></i> : null }
-      </div>
-      <div>
-        {displayDetails === group.id && (
-          <>
-          <div className="font-roboto text-sm font-light mt-2 mb-4">
-            <p>{group.description}</p>
-            <p> Budget remaining this month: $25 / ${group.budget}</p>
-            <h3 className="text-decoration-line mt-2 text-base font-bold">
-              In this group:
-            </h3>
-            {/* call a function to display friends list */}
-            {retrieveFriendsName(friends, group.friendIDs)}
-          </div>
-          <div className="flex justify-between">
-          
-          <div className="flex gap-2">
-            <Button 
-              variant={"small"} 
-              // onClick={() => handleEditGroup(group)}
-              onClick={() => handleSetModal('EditGroup', group.id)}
-              className={'bg-accent'}
+  const groupList = groupData.map((group) => {
+    //expense calculator
+    const [expenseTotal, overBudget, newGroup] = expenseAmount(
+      expenses,
+      group.expenseIDs,
+      group.budget,
+    );
+    return (
+      <div
+        onClick={() => {
+          handleDisplayDetails(group.ID);
+        }}
+        key={group.ID}
+        className="mb-1 flex cursor-pointer flex-col rounded-lg bg-slate-100 px-4 py-4"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col">
+            <h2 className="">{group.name}</h2>
+            {!newGroup && (
+              <span
+                className={`${overBudget ? `text-red-600` : `text-green-600`} text-sm`}
               >
-              Edit
-            </Button>
-            <Button 
-              variant={"small"} 
-              onClick={() => handleDelete(group.id)}
-              className={'bg-accent'}
-              >
-              Delete
-            </Button>
+                {overBudget ? `Over: ` : `Under: `}
+                {expenseTotal}
+              </span>
+            )}
           </div>
+          <i
+            className={`fa-solid ${displayDetails === group.ID ? `fa-chevron-down` : `fa-chevron-up`} text-3xl text-accent`}
+          ></i>
         </div>
-          </>
-        )}
+        <div>
+          {displayDetails === group.ID && (
+            <>
+              <div className="mb-4 mt-2 font-roboto text-sm font-light">
+                <p>{group.description}</p>
+                <p>Budget:{group.budget}</p>
+                {/* call a function to display friends list */}
+                {group.friendIDs &&
+                  retrieveList(friends, group.friendIDs, "friends")}
+                {/* check for group expenses, if exists call a function to display expense list */}
+                {group.expenseIDs &&
+                  retrieveList(expenses, group.expenseIDs, "expenses")}
+              </div>
+              <div className="flex justify-between">
+                <div className="flex gap-2">
+                  <Button
+                    variant={"small"}
+                    // onClick={() => handleEditGroup(group)}
+                    onClick={() => handleSetModal("EditGroup", group.ID)}
+                    className={"bg-accent"}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant={"small"}
+                    onClick={() => handleDelete(group.ID)}
+                    className={"bg-accent"}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  ));
-
+    );
+  });
   return (
     <div>
-      <div className="flex flex-col-reverse mb-4">{groupList}</div>
+      <div className="mb-4 flex flex-col-reverse">{groupList}</div>
     </div>
   );
 }

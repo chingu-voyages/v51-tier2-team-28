@@ -1,30 +1,49 @@
-import { UseDataContext } from '../context/SiteContext'
+import { UseDataContext } from "../context/SiteContext";
+import db from "../../utils/localstoragedb";
+import IconButton from "../ui/IconButton";
 
-export default function ExpenseList(){
-    const { groupData, setGroupData, expense } = UseDataContext()
-    console.log('expense', expense)
-    
-    const expenseItems = expense.map(item => (
-        <div key={item.id} className='flex flex-col bg-slate-100 rounded-md py-4 px-2 mb-1 cursor-pointer'>
-            <div className="flex justify-between">
-                <div>{item.name}</div>
-                <div>{item.amount}</div>
-                <div className="flex gap-2">
-                <button className="bg-slate-500 text-slate-100 px-2 rounded-sm hover:bg-slate-600">
-                    edit
-                </button>
-                <button className="bg-slate-500 text-slate-100 px-2 rounded-sm hover:bg-slate-600">
-                    delete
-                </button>
-                </div>
-            </div>
+export default function ExpenseList() {
+  const { expenses, setExpenses, handleSetModal } = UseDataContext();
+  // console.log('expenses', expenses)
+
+  // Filter out id match, delete from local storage
+  const handleDeleteExpense = (id) => {
+    const updatedExpense = expenses.filter((exp) => exp.id !== id);
+    console.log("expenses", updatedExpense);
+    db.deleteRows("expenses", { id });
+    db.commit();
+    setExpenses(db.queryAll("expenses"));
+  };
+
+  const expenseItems = expenses.map((expense) => (
+    <div
+      key={expense.ID}
+      className="mb-1 flex flex-col rounded-lg bg-slate-100 px-4 py-4"
+    >
+      <div className="flex items-center justify-between">
+        <div className="content-start">{expense.name}</div>
+        <div className="content-end">{expense.amount}</div>
+        <div className="flex content-end gap-2">
+          <IconButton
+            icon="fa-regular fa-pen-to-square"
+            onClick={() => handleSetModal("EditExpense", expense.ID)}
+            variant={"small"}
+            className="font-normal"
+            style="blue"
+          ></IconButton>
+
+          <IconButton
+            icon="fa-regular fa-trash-can"
+            onClick={() => {
+              handleDeleteExpense(expense.id);
+            }}
+            variant={"small"}
+            className="font-normal"
+          ></IconButton>
         </div>
-    ))
-//    console.log('expense'. expense)
-    
-    return(
-        <div className="flex flex-col-reverse mb-4">
-            {expenseItems}
-        </div>
-    )
+      </div>
+    </div>
+  ));
+
+  return <div className="mb-4 flex flex-col-reverse">{expenseItems}</div>;
 }

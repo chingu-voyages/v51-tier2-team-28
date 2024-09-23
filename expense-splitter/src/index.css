@@ -4,22 +4,23 @@
 
 @layer base {
   body {
-    @apply bg-gray-50;
+    /* @apply bg-gray-50; */
   }
   h1 {
-    @apply text-[32px] font-medium mb-4;
+    @apply mb-4 text-[32px] font-medium;
   }
   h2,
   label {
     @apply text-lg font-semibold;
   }
   p {
-    @apply text-[16px] font-light;}
+    @apply text-[16px] font-light;
+  }
   input,
   select {
-    @apply bg-accent/10 rounded-lg p-4 font-roboto font-light text-sm placeholder:text-accent;
+    @apply rounded-lg bg-accent/10 p-5 font-roboto font-light placeholder:text-accent;
   }
   .error-text {
-    @apply text-xs font-light text-red-500;
+    @apply text-sm font-normal text-red-500;
   }
 }

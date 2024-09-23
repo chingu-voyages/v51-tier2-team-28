@@ -18,6 +18,9 @@ export const dummyFriends = [
   },
 ];
 
+export const userSchema = ["name", "email"];
+export const dummyUser = [{ id: "1", name: "Cornelius", email: "c@c.com" }];
+
 export const expensesSchema = [
   "id",
   "name",
@@ -25,6 +28,7 @@ export const expensesSchema = [
   "category",
   "amount",
   "groupId",
+  "weight",
 ];
 export const dummyExpenses = [
   {
@@ -68,25 +72,32 @@ export const dummyGroups = [
     description: "School friends",
     budget: "550",
     friendIDs: ["9641947f-6b00-4db7-9c7e-9e479b438bd8"],
-    expenseIDs: ["fb5669e1-caf6-463a-a9b9-a57af90a0a66"],
+    expenseIDs: [
+      "fb5669e1-caf6-463a-a9b9-a57af90a0a66",
+      "2c0ce368-7a0c-4b72-ad30-8c03a8d7318a",
+    ],
   },
   {
     id: "47dd1683-bcbf-4a20-9e10-d8596474bc5c",
     name: "CoWorkers",
     description: "Work gift exchange",
     budget: "60",
-    friendIDs: [
-      "d5923f14-bc79-44ea-8388-d354c72c2253",
+    friendIDs: ["d5923f14-bc79-44ea-8388-d354c72c2253"],
+    expenseIDs: [
+      "ecd43989-b611-49d1-9093-0f8bc2378a11",
       "8217468b-ec4e-4340-9c90-665dff5d22d2",
+      "fb5669e1-caf6-463a-a9b9-a57af90a0a66",
     ],
-    expenseIDs: ["ecd43989-b611-49d1-9093-0f8bc2378a11"],
   },
   {
     id: "c35a55d7-1b2d-4185-98b4-f536f5ea25f6",
     name: "Day Trippers",
     description: "Explorer group",
-    budget: "",
+    budget: "1000",
     friendIDs: ["d5923f14-bc79-44ea-8388-d354c72c2253"],
-    expenseIDs: ["2c0ce368-7a0c-4b72-ad30-8c03a8d7318a"],
+    expenseIDs: [
+      "2c0ce368-7a0c-4b72-ad30-8c03a8d7318a",
+      "fb5669e1-caf6-463a-a9b9-a57af90a0a66",
+    ],
   },
 ];
