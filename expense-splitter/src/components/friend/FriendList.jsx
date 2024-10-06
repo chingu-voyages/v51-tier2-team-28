@@ -29,8 +29,6 @@ const FriendList = (props) => {
   // filter friends list to not include "Me"
   const friendsList = friends.filter((item) => item.name !== "Me");
 
-  console.log(friendsList);
-
   // filter friends for search bar
   const filteredData = friendsList.filter((search) => {
     if (props.input === "") {
