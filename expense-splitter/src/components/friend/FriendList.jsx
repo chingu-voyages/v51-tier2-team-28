@@ -26,12 +26,17 @@ const FriendList = (props) => {
     db.commit();
   };
 
+  // filter friends list to not include "Me"
+  const friendsList = friends.filter((item) => item.name !== "Me");
+
+  console.log(friendsList);
+
   // filter friends for search bar
-  const filteredData = friends.filter((search) => {
-    if (props.input === '') {
+  const filteredData = friendsList.filter((search) => {
+    if (props.input === "") {
       return search;
     } else {
-      return search.name.toLowerCase().includes(props.input)
+      return search.name.toLowerCase().includes(props.input);
     }
   });
 
