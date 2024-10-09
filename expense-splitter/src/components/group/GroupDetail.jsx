@@ -110,7 +110,10 @@ function GroupDetail() {
   };
 
   const friendsList = friends
-    .filter((friend) => singleGroup.friendIDs.includes(friend.id))
+    .filter(
+      (friend) =>
+        singleGroup.friendIDs.includes(friend.id) && friend.name !== "Me",
+    )
     .map((friend) => friend.name.split(" ")[0]);
 
   const friendsDisplay =

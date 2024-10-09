@@ -54,6 +54,7 @@ export default function Expense() {
     // if modal is not showing then display the following
     !modal.show && (
       <>
+        <h1 className="text-center">Expenses</h1>
         <div className="mb-2">
           <SearchBar input={inputText} inputHandler={inputHandler} />
         </div>
