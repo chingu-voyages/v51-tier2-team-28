@@ -62,6 +62,7 @@ export default function CreateGroup() {
           </label>
           <input
             id="name"
+            autoComplete="name"
             placeholder="Name your group"
             className={`border ${errors.name ? "border-red-500 outline-red-500" : "border-transparent"} `}
             {...register("name", {

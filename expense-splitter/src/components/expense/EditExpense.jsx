@@ -176,9 +176,12 @@ export default function CreateExpense() {
         key={friend.name}
         className="mb-2 grid grid-cols-3 items-center justify-between gap-2"
       >
-        <label className="mr-2">{friend.name}</label>
+        <label className="mr-2" htmlFor={friend.name}>
+          {friend.name}
+        </label>
         <div className="relative ml-auto flex w-[98px] items-center">
           <input
+            id={friend.name}
             className="w-full pr-4"
             name={friend.name}
             required
@@ -238,10 +241,12 @@ export default function CreateExpense() {
       <h1 className="text-center">Edit Expense </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-5 flex flex-col">
-          <label className="mb-1" aria-required="true">
+          <label className="mb-1" aria-required="true" htmlFor="name">
             Name:*{" "}
           </label>
           <input
+            id="name"
+            autoComplete="name"
             placeholder="Name of expense"
             {...register("name", { required: "name is required" })}
           />
@@ -249,10 +254,11 @@ export default function CreateExpense() {
         </div>
 
         <div className="mb-5 flex flex-col">
-          <label className="mb-1" aria-required="true">
+          <label className="mb-1" aria-required="true" htmlFor="description">
             Description:*{" "}
           </label>
           <input
+            id="description"
             placeholder="Describe the expense"
             defaultValue={currentExpense.description}
             {...register("description", {
@@ -269,6 +275,7 @@ export default function CreateExpense() {
             Category:*
           </label>
           <select
+            id="category"
             className="h-16"
             name="category"
             {...register("category", {
@@ -288,10 +295,11 @@ export default function CreateExpense() {
         </div>
 
         <div className="mb-5 flex flex-col">
-          <label className="mb-1" aria-required="true">
+          <label className="mb-1" aria-required="true" htmlFor="amount">
             Amount:*{" "}
           </label>
           <input
+            id="amount"
             placeholder="Enter a value"
             {...register("amount", {
               required: "amount required",
@@ -312,6 +320,7 @@ export default function CreateExpense() {
           </label>
 
           <select
+            id="group"
             name="group"
             disabled={true}
             className="h-16 cursor-not-allowed opacity-50"

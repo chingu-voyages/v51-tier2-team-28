@@ -3,6 +3,7 @@ export default function IconButton({ children, icon, onClick }) {
 
   return (
     <button
+      tabIndex={-1}
       onClick={onClick}
       className="text-slate mx-auto flex h-[54px] w-[80px] flex-col items-center rounded-lg py-[0.16rem] transition-all hover:bg-white hover:text-primary/90"
     >

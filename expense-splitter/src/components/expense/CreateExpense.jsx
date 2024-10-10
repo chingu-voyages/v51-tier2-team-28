@@ -246,10 +246,12 @@ export default function CreateExpense() {
       <h1 className="text-center">Create an Expense </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-5 flex flex-col">
-          <label className="mb-1" aria-required="true">
+          <label className="mb-1" aria-required="true" htmlFor="name">
             Name:*{" "}
           </label>
           <input
+            id="name"
+            autoComplete="name"
             placeholder="Name of expense"
             {...register("name", { required: "A name is required" })}
           />
@@ -257,10 +259,11 @@ export default function CreateExpense() {
         </div>
 
         <div className="mb-5 flex flex-col">
-          <label className="mb-1" aria-required="true">
+          <label className="mb-1" aria-required="true" htmlFor="description">
             Description:*{" "}
           </label>
           <input
+            id="description"
             placeholder="Describe the expense"
             {...register("description", {
               required: "A description is required",
@@ -276,6 +279,7 @@ export default function CreateExpense() {
             Category:*
           </label>
           <select
+            id="category"
             className="h-16"
             name="category"
             {...register("category", {
@@ -295,10 +299,11 @@ export default function CreateExpense() {
         </div>
 
         <div className="mb-5 flex flex-col">
-          <label className="mb-1" aria-required="true">
+          <label className="mb-1" aria-required="true" htmlFor="amount">
             Amount:*{" "}
           </label>
           <input
+            id="amount"
             placeholder="Enter a value"
             {...register("amount", {
               required: "Please enter an amount",
@@ -319,6 +324,7 @@ export default function CreateExpense() {
           </label>
 
           <select
+            id="group"
             className="h-16"
             name="group"
             {...register("group", {
