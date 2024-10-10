@@ -66,11 +66,6 @@ function ExpenseDetail() {
     (group) => group.id === expenseDetails.groupId,
   )[0];
 
-  // get friends names from goup
-  const friendNames = friends.filter((friend) =>
-    expenseGroup.friendIDs.includes(friend.id),
-  );
-
   // set data for pie chart to be array of contribution values
   const pieChartData = {};
 
@@ -93,17 +88,20 @@ function ExpenseDetail() {
   });
 
   const memberDisplay = sortedContributions.map((friend) => {
+    console.log(friend);
     return (
       <Card
         key={friend.friendId}
         icon={"fa-user"}
         hasButtons={true}
-        title={friendNames.find((i) => i.id === friend.friendId).name}
+        title={friends.find((i) => i.id === friend.friendId).name}
         subtitle={parseFloat(friend.percentage).toFixed(2) + "%"}
         price={((friend.percentage / 100) * expenseDetails.amount).toFixed(2)}
       />
     );
   });
+
+  console.log(memberDisplay);
 
   return (
     !modal.show && (
