@@ -1,43 +1,40 @@
+# Let's Split It!
 [https://expensesplitterdev.netlify.app/](https://expensesplitterdev.netlify.app/)
 
-# voyage-tasks
+##Overview
+This project..
 
-Your project's `readme` is as important to success as your code. For
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+## Features
+**Expense Group Management:**
+This project..
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+**Expense Management:**
+This project..
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+**Receipts:**
+This project..
 
-> Own it & Make it your Own!
+**Analytics:**
+This project..
 
-## Team Documents
+**User Interface:**
+This project..
 
-You may find these helpful as you work together to organize your project.
+## Dependencies
+React
+Tailwind
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+## Running the Project
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+1. Clone this project
+ 2. `cd` into project directory 
+ 3. To run the app on your local device, make sure to install the appropriate packages and run using the following command:
+    ```bash
+    npm i 
+    npm run dev
+    ```
 
 ## Our Team
-
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
 
 - Kristi : [GitHub](https://github.com/kristi-h) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Carlos Cespedes (Developer): [GitHub](https://github.com/ccespedes) / [LinkedIn](https://linkedin.com/in/account)
