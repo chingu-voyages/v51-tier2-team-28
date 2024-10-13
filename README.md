@@ -42,7 +42,7 @@ An easy to use search bar is accessible on each tab to search for your group, fr
 
 1. Clone this project locally
 2. cd into the project directory
-3. cd into Expense Splitter
+3. cd into expense-splitter
 4. To run the app on your local device, make sure to install the appropriate packages and run using the following command:
 
 ```sh
