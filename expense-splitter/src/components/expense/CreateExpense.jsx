@@ -198,7 +198,7 @@ export default function CreateExpense() {
             %
           </span>
         </div>
-        <div className="rounded-lg bg-accent/50 p-5 text-center font-semibold">
+        <div className="h-16 rounded-lg bg-accent/50 p-5 text-center font-semibold">
           {friend.dollar}
         </div>
       </div>
