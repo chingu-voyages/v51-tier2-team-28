@@ -129,14 +129,11 @@ export default function CreateExpense() {
 
       setWeightTotal(Math.round(totalPercentages));
 
-      const acceptedWeight =
-        parseInt(newWeight) <= weightLimit ? newWeight : "0";
-
       // if a new weight has been inputted
       return newWeight !== "0"
         ? {
             ...friend,
-            weight: acceptedWeight.toString(),
+            weight: newWeight.toString(),
             dollar: !newWeight ? 0 : `$${newDollar.toFixed(2)}`,
           }
         : {
@@ -189,7 +186,7 @@ export default function CreateExpense() {
             defaultValue={0}
             {...register(`${friend.name}`, {
               pattern: {
-                alue: /^\d{1,2}(\.\d{0,2})?$/,
+                value: /^\d{1,2}(\.\d{0,2})?$/,
                 message:
                   "Invalid input. Please enter a number between 0 and 99.",
               },
@@ -208,7 +205,7 @@ export default function CreateExpense() {
             %
           </span>
         </div>
-        <div className="rounded-lg bg-accent/50 p-5 text-center font-semibold">
+        <div className="h-16 rounded-lg bg-accent/50 p-5 text-center font-semibold">
           {friend.dollar}
         </div>
       </div>
