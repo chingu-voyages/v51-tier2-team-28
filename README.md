@@ -73,5 +73,5 @@ React, Tailwind, React Hook Forms, Firebase, html2pdf, Local Storage DB, Zod, Na
 
 ## Special Thanks
 
-Special thanks to Carlos Cespedes and Alex Singh for leading the development team.
+Special thanks to Carlos Cespedes and Alex Singh for leading the development team.  
 Special thanks to Chingu for organizing this project.
