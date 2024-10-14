@@ -322,7 +322,6 @@ export default function CreateExpense() {
             Amount:*{" "}
           </label>
           <input
-            type="number"
             id="amount"
             placeholder="Enter a value"
             {...register("amount", {
@@ -333,6 +332,10 @@ export default function CreateExpense() {
                   "Please enter a valid dollar amount (e.g., 10, 10.50).",
               },
             })}
+            onInput={(e) => {
+              const input = e.target;
+              input.value = input.value.replace(/[^0-9.]/g, ""); // Remove non-numeric and non-period characters
+            }}
           />
           {errors.amount && (
             <p className="error-text"> {errors.amount.message} </p>

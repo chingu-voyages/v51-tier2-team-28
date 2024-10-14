@@ -72,7 +72,7 @@ function ExpenseDetail() {
   // get date and format it
   const expenseDate = formatDate(expenseDetails.date);
 
-  const expenseAmount = parseInt(expenseDetails.amount);
+  const expenseAmount = parseFloat(expenseDetails.amount);
 
   expenseDetails.weight.forEach((weight) => {
     const friendInfo = friends.find((friend) => friend.id === weight.friendId);
@@ -114,7 +114,7 @@ function ExpenseDetail() {
         </div>
         <div className="flex flex-col gap-2">
           <h2 className="p-2 text-center text-[32px] font-medium">
-            ${expenseAmount.toFixed(2)}
+            ${expenseAmount}
           </h2>
           <p>{expenseDetails.description}</p>
           <p>
