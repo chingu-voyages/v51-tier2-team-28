@@ -71,3 +71,7 @@ React, Tailwind, React Hook Forms, Firebase, html2pdf, Local Storage DB, Zod, Na
 - Smiti Mishra (Scrum Master): [GitHub](https://github.com/SM171906) / [LinkedIn](https://www.linkedin.com/in/smitimishra/)
 - Abby Nyhof (UX Designer): [GitHub](https://github.com/abbynyhof) / [LinkedIn](https://www.linkedin.com/in/abbynyhof/)
 
+## Special Thanks
+
+Special thanks to Carlos Cespedes and Alex Singh for leading the development team.
+Special thanks to Chingu for organizing this project.
