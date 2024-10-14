@@ -4,11 +4,13 @@ import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 
 const GetStarted = () => {
-  const { friends, handleSetModal } = UseDataContext();
+  const { friends, groupsData, handleSetModal } = UseDataContext();
 
   useEffect(() => {
     if (friends.length < 2) {
-      toggleDialog(deleteDialogRef);
+      toggleDialog(addFriendDialogRef);
+    } else if (!groupsData) {
+      toggleDialog(addGroupDialogRef);
     }
   });
 
@@ -22,10 +24,11 @@ const GetStarted = () => {
   };
 
   // Create reference to dom elements
-  const deleteDialogRef = useRef(null);
+  const addFriendDialogRef = useRef(null);
+  const addGroupDialogRef = useRef(null);
   return (
     <>
-      <Dialog isCustom={true} dialogRef={deleteDialogRef}>
+      <Dialog isCustom={true} dialogRef={addFriendDialogRef}>
         <div className="flex flex-col items-center justify-center">
           <p className="mb-6 text-center">
             Get started by adding a friend to split expenses with.
@@ -35,6 +38,19 @@ const GetStarted = () => {
             onClick={() => handleSetModal("FriendForm")}
           >
             Add Friend
+          </Button>
+        </div>
+      </Dialog>
+      <Dialog isCustom={true} dialogRef={addGroupDialogRef}>
+        <div className="flex flex-col items-center justify-center">
+          <p className="mb-6 text-center">
+            Create a group to add expenses with friends.
+          </p>
+          <Button
+            className="w-full sm:w-48"
+            onClick={() => handleSetModal("CreateGroup")}
+          >
+            Add a Group
           </Button>
         </div>
       </Dialog>
