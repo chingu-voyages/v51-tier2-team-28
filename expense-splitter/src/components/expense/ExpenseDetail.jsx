@@ -72,7 +72,7 @@ function ExpenseDetail() {
   // get date and format it
   const expenseDate = formatDate(expenseDetails.date);
 
-  const expenseAmount = parseFloat(expenseDetails.amount);
+  const expenseAmount = parseFloat(expenseDetails.amount).toFixed(2);
 
   expenseDetails.weight.forEach((weight) => {
     const friendInfo = friends.find((friend) => friend.id === weight.friendId);
