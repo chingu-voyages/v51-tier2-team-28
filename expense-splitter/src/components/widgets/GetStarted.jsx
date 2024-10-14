@@ -4,12 +4,14 @@ import Button from "../ui/Button";
 import Dialog from "../ui/Dialog";
 
 const GetStarted = () => {
-  const { friends, groupsData, handleSetModal } = UseDataContext();
+  const { friends, groupData, handleSetModal } = UseDataContext();
+
+  console.log(groupData);
 
   useEffect(() => {
     if (friends.length < 2) {
       toggleDialog(addFriendDialogRef);
-    } else if (!groupsData) {
+    } else if (groupData.length === 0) {
       toggleDialog(addGroupDialogRef);
     }
   });

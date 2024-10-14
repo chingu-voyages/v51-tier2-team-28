@@ -221,7 +221,8 @@ function GroupDetail() {
             </div>
             <p className="text-center font-normal">
               <span className="font-bold">Budget spending this month:</span> $
-              {totalExpenseAmount} / ${singleGroup.budget}
+              {totalExpenseAmount} / $
+              {parseFloat(singleGroup.budget).toFixed(2)}
             </p>
             <PieChart label={"Categories"} pieData={pieData()} />
           </>
